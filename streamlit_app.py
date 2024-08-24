@@ -36,11 +36,8 @@ def train_model(X_train, y_train):
     joblib.dump(model, 'fraud_detection_model.pkl')
     return model
 
-# Train the model if not already done
-try:
-    model = joblib.load('fraud_detection_model.pkl')
-except FileNotFoundError:
-    model = train_model(X_train, y_train)
+# Re-train and save the model
+model = train_model(X_train, y_train)
 
 def predict(features):
     model = joblib.load('fraud_detection_model.pkl')
@@ -139,5 +136,3 @@ if st.session_state['show_class_dist']:
     ax.set_xlabel('Class')
     ax.set_ylabel('Count')
     st.pyplot(fig)
-
-
